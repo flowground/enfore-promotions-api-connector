@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "gift_card_id": {
+            "required": true,
+            "type": "string"
+        },
+        "gift_card_redemption_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

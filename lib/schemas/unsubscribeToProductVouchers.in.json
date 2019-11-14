@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "subscription_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

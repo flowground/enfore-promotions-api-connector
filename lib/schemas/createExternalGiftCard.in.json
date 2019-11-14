@@ -1,0 +1,178 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "current_balance",
+                "external_number",
+                "id",
+                "name",
+                "status"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The technical identifier of the gift card.",
+                    "readOnly": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the gift card.\nThis usually is the name of the \"source product\".\n"
+                },
+                "number": {
+                    "type": "string",
+                    "description": "The unique number of the gift card.",
+                    "readOnly": true
+                },
+                "external_number": {
+                    "type": "string",
+                    "description": "A unique number provided by a third-party.\nFor use when importing externally issued gift cards into the system.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "The possible status values for a gift card.",
+                    "enum": [
+                        "ISSUED",
+                        "PARTIALLY_REDEEMED",
+                        "REDEEMED",
+                        "EXPIRED",
+                        "CANCELED",
+                        "DEACTIVATED"
+                    ]
+                },
+                "current_balance": {
+                    "required": [
+                        "unit",
+                        "value"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "value": {
+                            "multipleOf": 0.000001,
+                            "type": "number",
+                            "description": "The numerical value of the Money.\nMust be in the range of -9,000,000,000,000 to 9,000,000,000,000 and may use up to 6 decimal digits.\n"
+                        },
+                        "unit": {
+                            "type": "string",
+                            "description": "Represents a currency. Uses the ISO 4217 codes.",
+                            "enum": [
+                                "AUD",
+                                "BRL",
+                                "CAD",
+                                "CHF",
+                                "CNY",
+                                "DKK",
+                                "EUR",
+                                "GBP",
+                                "HKD",
+                                "IDR",
+                                "INR",
+                                "JPY",
+                                "KRW",
+                                "MXN",
+                                "MYR",
+                                "NOK",
+                                "NZD",
+                                "PHP",
+                                "RUB",
+                                "SEK",
+                                "SGD",
+                                "TRY",
+                                "TWD",
+                                "USD",
+                                "ZAR"
+                            ]
+                        }
+                    },
+                    "description": "A Money represents a monetary value (i.e., a currency and an amount), for example \"120 EUR\" or \"2,500.75 USD\"."
+                },
+                "initial_balance": {
+                    "required": [
+                        "unit",
+                        "value"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "value": {
+                            "multipleOf": 0.000001,
+                            "type": "number",
+                            "description": "The numerical value of the Money.\nMust be in the range of -9,000,000,000,000 to 9,000,000,000,000 and may use up to 6 decimal digits.\n"
+                        },
+                        "unit": {
+                            "type": "string",
+                            "description": "Represents a currency. Uses the ISO 4217 codes.",
+                            "enum": [
+                                "AUD",
+                                "BRL",
+                                "CAD",
+                                "CHF",
+                                "CNY",
+                                "DKK",
+                                "EUR",
+                                "GBP",
+                                "HKD",
+                                "IDR",
+                                "INR",
+                                "JPY",
+                                "KRW",
+                                "MXN",
+                                "MYR",
+                                "NOK",
+                                "NZD",
+                                "PHP",
+                                "RUB",
+                                "SEK",
+                                "SGD",
+                                "TRY",
+                                "TWD",
+                                "USD",
+                                "ZAR"
+                            ]
+                        }
+                    },
+                    "description": "A Money represents a monetary value (i.e., a currency and an amount), for example \"120 EUR\" or \"2,500.75 USD\"."
+                },
+                "issued_date_and_time": {
+                    "type": "string",
+                    "description": "Timestamp when the gift card was issued.",
+                    "format": "date-time"
+                },
+                "expiration_date_and_time": {
+                    "type": "string",
+                    "description": "Timestamp when the gift card will/did expire.",
+                    "format": "date-time"
+                },
+                "last_used_date_and_time": {
+                    "type": "string",
+                    "description": "Timestamp when the gift card was last used.",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "tax": {
+                    "type": "string",
+                    "description": "A Tax represents a specific and unchangeable tax. Whenever a tax (rate) changes due to new legislation\nor other reasons, a new Tax must be defined and used from then on.\n\nFor example, the standard VAT rates in Germany have been changed multiple times in the last 50 years:\n* 01.01.1968 � 30.06.1968 = 10%\n* 01.07.1968 � 31.12.1977 = 11%\n* 01.01.1978 � 30.06.1979 = 12%\n* 01.07.1979 � 30.06.1983 = 13%\n* 01.07.1983 � 31.12.1992 = 14%\n* 01.01.1993 � 31.03.1998 = 15%\n* 01.04.1998 � 31.12.2006 = 16%\n* 01.01.2007 � current    = 19%\n\nFor now, we only use the tax DE_STANDARD_VAT_2007. But if, hypothetically, Germany would increase its\nstandard VAT rate to 21% on 1/JAN/2020, we would define a new tax DE_STANDARD_VAT_2020 and use that from\n1/JAN/2020 on.\n",
+                    "enum": [
+                        "DE_STANDARD_VAT_2007",
+                        "DE_REDUCED_VAT_2007",
+                        "DE_NO_VAT"
+                    ]
+                },
+                "source_product": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "The ID of the gift card product that caused the creation of this gift card voucher.\n"
+                },
+                "sold_via_invoice": {
+                    "type": "string",
+                    "description": "ID of the invoice",
+                    "readOnly": true
+                }
+            }
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

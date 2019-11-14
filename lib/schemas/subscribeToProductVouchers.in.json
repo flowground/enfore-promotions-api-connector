@@ -1,0 +1,29 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "callback_url",
+                "id"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The technical identifier of the subscription.\nAssigned by the enfore platform on creation of the subscription.\n",
+                    "readOnly": true
+                },
+                "callback_url": {
+                    "type": "string",
+                    "description": "The callback URL where event notifications are to be delivered. It *must* be HTTPS to prevent man-in-the-middle attacks.",
+                    "format": "uri",
+                    "example": "https://myserver.com/send/events/here"
+                }
+            }
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

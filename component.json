@@ -1,0 +1,361 @@
+{
+    "title": "enfore Promotions API",
+    "description": "enfore API for managing promotions and related objects\n\nSales vouchers represent a liability of the business against whoever owns the voucher.\n\nThe enfore platform supports three types of sales vouchers:\n**gift cards**, **product vouchers**, and **category vouchers**.\n",
+    "docsUrl": "",
+    "url": "/",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "getGiftCards": {
+            "main": "./lib/actions/getGiftCards.js",
+            "title": "Iterate over gift cards.",
+            "description": "Returns gift cards, sorted in ascending order by `issued_date_and_time`.\nFor gift cards without such a value, the timestamp of their import into the system is used instead.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getGiftCards.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "createExternalGiftCard": {
+            "main": "./lib/actions/createExternalGiftCard.js",
+            "title": "Create a new external gift card",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/createExternalGiftCard.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "updateActivationStatusGiftCard": {
+            "main": "./lib/actions/updateActivationStatusGiftCard.js",
+            "title": "Update the activation status of an external gift card",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/updateActivationStatusGiftCard.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getGiftCard": {
+            "main": "./lib/actions/getGiftCard.js",
+            "title": "Load a gift card.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getGiftCard.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getGiftCardSubscriptions": {
+            "main": "./lib/actions/getGiftCardSubscriptions.js",
+            "title": "Get a list of registered consumers for gift card changes.",
+            "description": "Retrieve all currently active event subscriptions.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getGiftCardSubscriptions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "subscribeToGiftCards": {
+            "main": "./lib/actions/subscribeToGiftCards.js",
+            "title": "Register an event consumer with the API.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/subscribeToGiftCards.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "unsubscribeToGiftCards": {
+            "main": "./lib/actions/unsubscribeToGiftCards.js",
+            "title": "Delete a subscription for gift card updates",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/unsubscribeToGiftCards.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getGiftCardRedemptions": {
+            "main": "./lib/actions/getGiftCardRedemptions.js",
+            "title": "Iterate over the redemptions of a gift card.",
+            "description": "Returns redemptions of the gift card sorted ascending order by `transaction_date_and_time`.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getGiftCardRedemptions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "recordGiftCardRedemption": {
+            "main": "./lib/actions/recordGiftCardRedemption.js",
+            "title": "Record a new external redemption for a gift card",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/recordGiftCardRedemption.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getGiftCardRedemption": {
+            "main": "./lib/actions/getGiftCardRedemption.js",
+            "title": "Load a gift card redemption.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getGiftCardRedemption.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getProductVouchers": {
+            "main": "./lib/actions/getProductVouchers.js",
+            "title": "Iterate over product vouchers.",
+            "description": "Returns product vouchers, sorted in ascending order by `issued_date_and_time`.\nFor product vouchers without such a value, the timestamp of their import into the system is used instead.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getProductVouchers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getProductVoucher": {
+            "main": "./lib/actions/getProductVoucher.js",
+            "title": "Load a product voucher.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getProductVoucher.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getProductVoucherSubscriptions": {
+            "main": "./lib/actions/getProductVoucherSubscriptions.js",
+            "title": "Get a list of registered consumers for product vouchers events.",
+            "description": "Retrieve all currently active event subscriptions.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getProductVoucherSubscriptions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "subscribeToProductVouchers": {
+            "main": "./lib/actions/subscribeToProductVouchers.js",
+            "title": "Register an event consumer with the API.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/subscribeToProductVouchers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "unsubscribeToProductVouchers": {
+            "main": "./lib/actions/unsubscribeToProductVouchers.js",
+            "title": "Delete a subscription for product voucher updates",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/unsubscribeToProductVouchers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getCategoryVouchers": {
+            "main": "./lib/actions/getCategoryVouchers.js",
+            "title": "Iterate over category vouchers.",
+            "description": "Returns category vouchers, sorted in ascending order by `issued_date_and_time`.\nFor category vouchers without such a value, the timestamp of their import into the system is used instead.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getCategoryVouchers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getCategoryVoucher": {
+            "main": "./lib/actions/getCategoryVoucher.js",
+            "title": "Load a category voucher.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getCategoryVoucher.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getCategoryVoucherSubscriptions": {
+            "main": "./lib/actions/getCategoryVoucherSubscriptions.js",
+            "title": "Get a list of registered consumers for category voucher events.",
+            "description": "Retrieve all currently active event subscriptions.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getCategoryVoucherSubscriptions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "subscribeToCategoryVouchers": {
+            "main": "./lib/actions/subscribeToCategoryVouchers.js",
+            "title": "Register an event consumer with the API.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/subscribeToCategoryVouchers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "unsubscribeToCategoryVouchers": {
+            "main": "./lib/actions/unsubscribeToCategoryVouchers.js",
+            "title": "Delete a subscription for category voucher updates",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/unsubscribeToCategoryVouchers.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

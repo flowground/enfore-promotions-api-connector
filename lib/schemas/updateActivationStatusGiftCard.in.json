@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "type": "string",
+            "description": "The possible activation statuses for a gift card.\nThey result in changes to the GiftCardStatus depending on the current balance:\n- If ACTIVE, the sales voucher is activated (ISSUED, PARTIALLY_REDEEMED or REDEEMED)\n- If DEACTIVATED, it's deactivated (DEACTIVATED).\n- It is not possible to go to EXPIRED or CANCELED status.\n",
+            "enum": [
+                "ACTIVE",
+                "DEACTIVATED"
+            ]
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "gift_card_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

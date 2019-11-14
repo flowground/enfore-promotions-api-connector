@@ -1,0 +1,38 @@
+{
+    "type": "object",
+    "properties": {
+        "from": {
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+        },
+        "to": {
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+        },
+        "limit": {
+            "maximum": 5000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int64"
+        },
+        "offset": {
+            "minimum": 0,
+            "type": "integer",
+            "format": "int64"
+        },
+        "number": {
+            "required": false,
+            "type": "string"
+        },
+        "external_number": {
+            "required": false,
+            "type": "string"
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

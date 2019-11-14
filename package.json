@@ -1,0 +1,15 @@
+{
+    "name": "enfore-promotions-api-connector",
+    "version": "0.0.4",
+    "description": "enfore API for managing promotions and related objects\n\nSales vouchers represent a liability of the business against whoever owns the voucher.\n\nThe enfore platform supports three types of sales vouchers:\n**gift cards**, **product vouchers**, and **category vouchers**.\n",
+    "main": "component.json",
+    "dependencies": {
+        "elasticio-node": "0.0.9",
+        "elasticio-sailor-nodejs": "^2.2.1",
+        "swagger-client": "^3.8.22"
+    },
+    "author": {
+        "name": "Deutsche Telekom AG"
+    },
+    "license": "Apache-2.0"
+}

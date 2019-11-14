@@ -1,0 +1,86 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "required": [
+                "external_reference",
+                "id",
+                "redeemed_amount",
+                "transaction_date_and_time"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The technical identifier of the redemption.",
+                    "readOnly": true
+                },
+                "transaction_date_and_time": {
+                    "type": "string",
+                    "description": "Point in time that the redemption occurred. Uses date-time notation in UTC. The date-time notation as defined by RFC 3339 (https://www.ietf.org/rfc/rfc3339.txt), section 5.6, with the \"Z\" as time-offset. For example, 2017-07-21T17:32:28.123Z",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "redeemed_amount": {
+                    "required": [
+                        "unit",
+                        "value"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "value": {
+                            "multipleOf": 0.000001,
+                            "type": "number",
+                            "description": "The numerical value of the Money.\nMust be in the range of -9,000,000,000,000 to 9,000,000,000,000 and may use up to 6 decimal digits.\n"
+                        },
+                        "unit": {
+                            "type": "string",
+                            "description": "Represents a currency. Uses the ISO 4217 codes.",
+                            "enum": [
+                                "AUD",
+                                "BRL",
+                                "CAD",
+                                "CHF",
+                                "CNY",
+                                "DKK",
+                                "EUR",
+                                "GBP",
+                                "HKD",
+                                "IDR",
+                                "INR",
+                                "JPY",
+                                "KRW",
+                                "MXN",
+                                "MYR",
+                                "NOK",
+                                "NZD",
+                                "PHP",
+                                "RUB",
+                                "SEK",
+                                "SGD",
+                                "TRY",
+                                "TWD",
+                                "USD",
+                                "ZAR"
+                            ]
+                        }
+                    },
+                    "description": "A Money represents a monetary value (i.e., a currency and an amount), for example \"120 EUR\" or \"2,500.75 USD\"."
+                },
+                "external_reference": {
+                    "maxLength": 256,
+                    "type": "string",
+                    "description": "An external reference for the redemption. E.g., an invoice number."
+                }
+            }
+        },
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "gift_card_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

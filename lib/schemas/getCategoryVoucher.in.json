@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "org_id": {
+            "required": true,
+            "type": "string"
+        },
+        "category_voucher_id": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
